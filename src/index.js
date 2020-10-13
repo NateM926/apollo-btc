@@ -14,14 +14,19 @@ const client = new ApolloClient({
 });
 
 function ExchangeRates() {
-  const { loading, error, data } = useQuery(gql`
-    {
-      rates(currency: "USD") {
-        currency
-        rate
+  const { loading, error, data } = useQuery(
+    gql`
+      {
+        rates(currency: "USD") {
+          currency
+          rate
+        }
       }
+    `,
+    {
+      fetchPolicy: "no-cache"
     }
-  `);
+  );
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
@@ -40,6 +45,7 @@ function App() {
     <ApolloProvider client={client}>
       <div>
         <h2>Coinbase GQL Example</h2>
+        <h4>no-cache mode...</h4>
         <ExchangeRates />
       </div>
     </ApolloProvider>
