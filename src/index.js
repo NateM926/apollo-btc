@@ -35,11 +35,17 @@ function App() {
 
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
-    if (error) return <p>{`Error :( ${error.message}`}</p>;
+
+    if (error)
+      return (
+        <div>
+          <p>{`Error :( ${error.message}`}</p>
+          <button onClick={() => refetch()}>Refetch!</button>
+        </div>
+      );
 
     return data.rates.map(({ currency, rate }) => (
       <div key={currency}>
-        <button onClick={() => refetch()}>Refetch!</button>
         <p>
           {currency}: {rate}
         </p>
