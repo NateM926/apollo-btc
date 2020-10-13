@@ -2,47 +2,51 @@ import React from "react";
 import { render } from "react-dom";
 import {
   ApolloClient,
+  NetworkStatus,
   InMemoryCache,
   ApolloProvider,
   useQuery,
   gql
 } from "@apollo/client";
 
-const client = new ApolloClient({
-  uri: "https://48p1r2roz4.sse.codesandbox.io",
-  cache: new InMemoryCache()
-});
-
-function ExchangeRates() {
-  const { loading, error, data, networkStatus } = useQuery(
-    gql`
-      {
-        rates(currency: "USD") {
-          currency
-          rate
-        }
-      }
-    `,
-    {
-      fetchPolicy: "no-cache",
-      notifyOnNetworkStatusChange: true
-    }
-  );
-
-  console.info("NETWORK STATUS: ", networkStatus);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{`Error :( ${error.message}`}</p>;
-
-  return data.rates.map(({ currency, rate }) => (
-    <div key={currency}>
-      <p>
-        {currency}: {rate}
-      </p>
-    </div>
-  ));
-}
-
 function App() {
+  const client = new ApolloClient({
+    uri: "https://48p1r2roz4.sse.codesandbox.io",
+    cache: new InMemoryCache()
+  });
+
+  function ExchangeRates() {
+    const { loading, error, data, networkStatus, refetch } = useQuery(
+      gql`
+        {
+          rates(currency: "USD") {
+            currency
+            rate
+          }
+        }
+      `,
+      {
+        fetchPolicy: "no-cache",
+        notifyOnNetworkStatusChange: true
+      }
+    );
+
+    console.info("NETWORK STATUS: ", networkStatus);
+
+    if (networkStatus === NetworkStatus.refetch) return "Refetching!";
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{`Error :( ${error.message}`}</p>;
+
+    return data.rates.map(({ currency, rate }) => (
+      <div key={currency}>
+        <button onClick={() => refetch()}>Refetch!</button>
+        <p>
+          {currency}: {rate}
+        </p>
+      </div>
+    ));
+  }
+
   return (
     <ApolloProvider client={client}>
       <div>
