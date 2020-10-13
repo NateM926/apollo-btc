@@ -28,10 +28,10 @@ function ExchangeRates() {
     }
   );
 
+  console.info("NETWORK STATUS: ", networkStatus);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
-  console.info("NETWORK STATUS: ", networkStatus);
   return data.rates.map(({ currency, rate }) => (
     <div key={currency}>
       <p>
