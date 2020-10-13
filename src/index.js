@@ -14,7 +14,7 @@ const client = new ApolloClient({
 });
 
 function ExchangeRates() {
-  const { loading, error, data } = useQuery(
+  const { loading, error, data, networkStatus } = useQuery(
     gql`
       {
         rates(currency: "USD") {
@@ -31,6 +31,7 @@ function ExchangeRates() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
+  console.info("NETWORK STATUS: ", networkStatus);
   return data.rates.map(({ currency, rate }) => (
     <div key={currency}>
       <p>
