@@ -24,13 +24,14 @@ function ExchangeRates() {
       }
     `,
     {
-      fetchPolicy: "no-cache"
+      fetchPolicy: "no-cache",
+      notifyOnNetworkStatusChange: true
     }
   );
 
   console.info("NETWORK STATUS: ", networkStatus);
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>{`Error :( \n\n${error.message}`}</p>;
+  if (error) return <p>{`Error :( ${error.message}`}</p>;
 
   return data.rates.map(({ currency, rate }) => (
     <div key={currency}>
