@@ -39,6 +39,22 @@ function App() {
     const submit = (e) => {
       e.preventDefault();
       console.log("test submit");
+      const headers = {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          data: "test"
+        })
+      };
+      fetch("http://example.com/movies.json", headers)
+        .then((data) => {
+          const jsonData = data.json();
+          console.log(jsonData); // JSON data parsed by `data.json()` call
+        })
+        .catch();
     };
 
     if (error)
@@ -47,7 +63,7 @@ function App() {
           <p>{`Error :( ${error.message}`}</p>
           <button onClick={() => refetch()}>Refetch!</button>
           <form onSubmit={(e) => submit(e)}>
-            <button type="submit">SUBMIT</button>
+            <button type="submit">TEST SUBMIT</button>
           </form>
         </div>
       );
