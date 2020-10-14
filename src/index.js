@@ -36,7 +36,8 @@ function App() {
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
-    const submit = () => {
+    const submit = (e) => {
+      e.preventDefault();
       console.log("test submit");
     };
 
