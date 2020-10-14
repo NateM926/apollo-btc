@@ -46,7 +46,7 @@ function App() {
         <div>
           <p>{`Error :( ${error.message}`}</p>
           <button onClick={() => refetch()}>Refetch!</button>
-          <form onSubmit={() => submit()}>
+          <form onSubmit={(e) => submit(e)}>
             <button type="submit">SUBMIT</button>
           </form>
         </div>
