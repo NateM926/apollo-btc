@@ -36,11 +36,18 @@ function App() {
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
+    const submit = () => {
+      console.log("test submit");
+    };
+
     if (error)
       return (
         <div>
           <p>{`Error :( ${error.message}`}</p>
           <button onClick={() => refetch()}>Refetch!</button>
+          <form onSubmit={() => submit()}>
+            <button type="submit">SUBMIT</button>
+          </form>
         </div>
       );
 
@@ -57,7 +64,7 @@ function App() {
     <ApolloProvider client={client}>
       <div>
         <h2>Coinbase GQL Example</h2>
-        <h4>no-cache mode...</h4>
+        <h4>no-cache fetchPolicy...</h4>
         <ExchangeRates />
       </div>
     </ApolloProvider>
