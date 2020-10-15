@@ -41,11 +41,11 @@ function App() {
       console.log("testing submit with reqOptions");
 
       const requestOptions = {
-        method: "GET",
+        method: "GET"
         // mode: "cors",
-        headers: {
-          "Content-Type": "application/json"
-        }
+        // headers: {
+        //   "Content-Type": "application/json"
+        // }
         // body: JSON.stringify({
         //   answer: 42
         // })
