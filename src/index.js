@@ -44,8 +44,8 @@ function App() {
         method: "GET",
         // mode: "cors",
         headers: {
-          // "Content-Type": "application/json"
-          "Content-Type": "application/x-www-form-urlencoded"
+          "Content-Type": "application/json"
+          // "Content-Type": "application/x-www-form-urlencoded"
         }
         // body: JSON.stringify({
         //   answer: 42
