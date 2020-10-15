@@ -32,29 +32,35 @@ function App() {
     );
 
     console.info("NETWORK STATUS: ", networkStatus);
-
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
     const submit = (e) => {
       e.preventDefault();
       console.log("test submit");
-      const headers = {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          data: "test"
-        })
-      };
-      fetch("http://example.com/movies.json", headers)
-        .then((data) => {
-          const jsonData = data.json();
-          console.log(jsonData); // JSON data parsed by `data.json()` call
-        })
-        .catch();
+
+      fetch(
+        "https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits"
+      )
+        .then((response) => response.json())
+        .then((commits) => alert(JSON.stringify(commits)));
+
+      // const requestOptions = {
+      //   method: "POST",
+      //   mode: "cors",
+      //   headers: {
+      //     "Content-Type": "application/json"
+      //   },
+      //   body: JSON.stringify({
+      //     data: "test"
+      //   })
+      // };
+      // fetch("https://example.com/movies.json", requestOptions)
+      //   .then((data) => {
+      //     const jsonData = data.json();
+      //     console.log(jsonData); // JSON data parsed by `data.json()` call
+      //   })
+      //   .catch();
     };
 
     if (error)
