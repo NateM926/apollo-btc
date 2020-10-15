@@ -42,7 +42,7 @@ function App() {
 
       const requestOptions = {
         method: "GET",
-        mode: "cors",
+        // mode: "cors",
         headers: {
           "Content-Type": "application/json"
         }
