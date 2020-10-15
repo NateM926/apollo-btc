@@ -37,50 +37,46 @@ function App() {
 
     const submit = (e) => {
       e.preventDefault();
-      console.log("test submit");
+      console.log("testing submit with reqOptions");
+
+      const requestOptions = {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json"
+        }
+        // body: JSON.stringify({
+        //   answer: 42
+        // })
+      };
 
       fetch(
-        "https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits"
+        "https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits",
+        requestOptions
       )
         .then((response) => response.json())
         .then((commits) => alert(JSON.stringify(commits)));
-
-      // const requestOptions = {
-      //   method: "POST",
-      //   mode: "cors",
-      //   headers: {
-      //     "Content-Type": "application/json"
-      //   },
-      //   body: JSON.stringify({
-      //     data: "test"
-      //   })
-      // };
-      // fetch("https://example.com/movies.json", requestOptions)
-      //   .then((data) => {
-      //     const jsonData = data.json();
-      //     console.log(jsonData); // JSON data parsed by `data.json()` call
-      //   })
-      //   .catch();
     };
 
-    if (error)
+    // TODO: remove defaulting to test submit fetch
+    if (true || error)
       return (
         <div>
-          <p>{`Error :( ${error.message}`}</p>
-          <button onClick={() => refetch()}>Refetch!</button>
+          {/* <p>{`Error :( ${error.message}`}</p>
+          <button onClick={() => refetch()}>Refetch!</button> */}
           <form onSubmit={(e) => submit(e)}>
-            <button type="submit">TEST SUBMIT</button>
+            <button type="submit">TEST SUBMIT FETCH</button>
           </form>
         </div>
       );
 
-    return data.rates.map(({ currency, rate }) => (
-      <div key={currency}>
-        <p>
-          {currency}: {rate}
-        </p>
-      </div>
-    ));
+    // return data.rates.map(({ currency, rate }) => (
+    //   <div key={currency}>
+    //     <p>
+    //       {currency}: {rate}
+    //     </p>
+    //   </div>
+    // ));
   }
 
   return (
