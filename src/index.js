@@ -36,15 +36,16 @@ function App() {
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
-    const submit = (e) => {
+    const submit = (e, useJson) => {
       e.preventDefault();
       console.log("testing submit with reqOptions");
 
       const requestOptions = {
-        // method: "GET",
+        method: "GET",
         // mode: "cors",
         headers: {
-          "Content-Type": "application/json"
+          // "Content-Type": "application/json"
+          "Content-Type": "application/x-www-form-urlencoded"
         }
         // body: JSON.stringify({
         //   answer: 42
