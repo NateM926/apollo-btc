@@ -26,30 +26,24 @@ function App() {
         }
       `,
       {
-        fetchPolicy: "no-cache",
+        fetchPolicy: "no-cache", // testing cache policies in the integration
         notifyOnNetworkStatusChange: true
       }
     );
 
-    console.log(data, refetch);
-    console.info("NETWORK STATUS: ", networkStatus);
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
-    const submit = (e, useJson) => {
+    const submit = (e) => {
       e.preventDefault();
       console.log("testing submit with reqOptions");
 
       const requestOptions = {
         method: "GET",
-        // mode: "cors",
         headers: {
-          "Content-Type": "application/json"
-          // "Content-Type": "application/x-www-form-urlencoded"
+          // "Content-Type": "application/json" // this header breaks the integration
+          "Content-Type": "application/x-www-form-urlencoded" // this header works in the integration
         }
-        // body: JSON.stringify({
-        //   answer: 42
-        // })
       };
 
       fetch(
@@ -60,32 +54,30 @@ function App() {
         .then((commits) => alert(JSON.stringify(commits)));
     };
 
-    // TODO: remove defaulting to test submit fetch
-    if (true || error)
+    if (error)
       return (
         <div>
-          {/* <p>{`Error :( ${error.message}`}</p>
-          <button onClick={() => refetch()}>Refetch!</button> */}
+          <p>{`Error :( ${error.message}`}</p>
+          <button onClick={() => refetch()}>Refetch!</button>
           <form onSubmit={(e) => submit(e)}>
             <button type="submit">TEST SUBMIT FETCH</button>
           </form>
         </div>
       );
 
-    // return data.rates.map(({ currency, rate }) => (
-    //   <div key={currency}>
-    //     <p>
-    //       {currency}: {rate}
-    //     </p>
-    //   </div>
-    // ));
+    return data.rates.map(({ currency, rate }) => (
+      <div key={currency}>
+        <p>
+          {currency}: {rate}
+        </p>
+      </div>
+    ));
   }
 
   return (
     <ApolloProvider client={client}>
       <div>
         <h2>Coinbase GQL Example</h2>
-        <h4>no-cache fetchPolicy...</h4>
         <ExchangeRates />
       </div>
     </ApolloProvider>
