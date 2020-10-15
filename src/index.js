@@ -31,6 +31,7 @@ function App() {
       }
     );
 
+    console.log(data, refetch);
     console.info("NETWORK STATUS: ", networkStatus);
     if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
