@@ -16,7 +16,9 @@ function App() {
   });
 
   function TestAlert() {
-    alert(window.myval);
+    // CefRefPtr
+    // alert(test.myval);
+    console.log(window);
   }
 
   function ExchangeRates() {
