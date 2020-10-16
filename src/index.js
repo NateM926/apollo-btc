@@ -15,8 +15,12 @@ function App() {
     cache: new InMemoryCache()
   });
 
+  function TestAlert() {
+    alert(window.myval);
+  }
+
   function ExchangeRates() {
-    const { loading, error, data, networkStatus, refetch } = useQuery(
+    const { loading, error, data } = useQuery(
       gql`
         {
           rates(currency: "USD") {
@@ -31,7 +35,7 @@ function App() {
       }
     );
 
-    if (networkStatus === NetworkStatus.refetch) return "Refetching!";
+    // if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
     const submit = (e) => {
@@ -54,11 +58,15 @@ function App() {
         .then((commits) => alert(JSON.stringify(commits)));
     };
 
-    if (error)
+    if (true || error)
       return (
         <div>
-          <p>{`Error :( ${error.message}`}</p>
-          <button onClick={() => refetch()}>Refetch!</button>
+          <script language="JavaScript">
+            {/* Should Shows an alert box with "My Value!" from the integration */}
+            {TestAlert()}
+          </script>
+          {/* <p>{`Error :( ${error.message}`}</p>
+          <button onClick={() => refetch()}>Refetch!</button> */}
           <form onSubmit={(e) => submit(e)}>
             <button type="submit">TEST SUBMIT FETCH</button>
           </form>
