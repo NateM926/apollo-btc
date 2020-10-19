@@ -5,14 +5,14 @@ import useUnload from "./useUnload";
 import ExchangeRates from "./ExchangeRates";
 
 function App() {
-  const client = new ApolloClient({
-    uri: "https://48p1r2roz4.sse.codesandbox.io",
-    cache: new InMemoryCache()
-  });
-
   useUnload((e) => {
     e.preventDefault();
     e.returnValue = "";
+  });
+
+  const client = new ApolloClient({
+    uri: "https://48p1r2roz4.sse.codesandbox.io",
+    cache: new InMemoryCache()
   });
 
   return (
