@@ -45,7 +45,7 @@ function App() {
   }
 
   function ExchangeRates() {
-    const { loading, error, data } = useQuery(
+    const { loading, error } = useQuery(
       gql`
         {
           rates(currency: "USD") {
