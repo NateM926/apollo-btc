@@ -15,8 +15,8 @@ function App() {
     cache: new InMemoryCache()
   });
 
-  // testing close event in the integration
-  window.addEventListener("beforeunload", function (e) {
+  // testing close event in the integration (beforeunload / onclose)
+  window.addEventListener("onclose", function (e) {
     // Cancel the event as stated by the standard.
     e.preventDefault();
 
@@ -47,8 +47,6 @@ function App() {
 
     const submit = (e) => {
       e.preventDefault();
-      console.log("testing submit with reqOptions");
-
       const requestOptions = {
         method: "GET",
         headers: {
