@@ -8,6 +8,7 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
+import { useUnload } from "./useUnload";
 
 function App() {
   const client = new ApolloClient({
@@ -15,16 +16,21 @@ function App() {
     cache: new InMemoryCache()
   });
 
-  // testing close event in the integration (beforeunload / onclose)
-  window.addEventListener("beforeunload", function (e) {
-    // Cancel the event as stated by the standard.
+  useUnload((e) => {
     e.preventDefault();
-
-    var confirmationMessage = "o/";
-
-    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
-    return confirmationMessage; //Webkit, Safari, Chrome
+    e.returnValue = "test";
   });
+
+  // testing close event in the integration (beforeunload / onclose)
+  // window.addEventListener("beforeunload", function (e) {
+  //   // Cancel the event as stated by the standard.
+  //   e.preventDefault();
+
+  //   var confirmationMessage = "o/";
+
+  //   (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+  //   return confirmationMessage; //Webkit, Safari, Chrome
+  // });
 
   function ExchangeRates() {
     const { loading, error, data, networkStatus, refetch } = useQuery(
