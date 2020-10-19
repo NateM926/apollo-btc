@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import useUnload from "./useUnload";
-import ExchangeRates from "./ExchangeRates";
+// import ExchangeRates from "./ExchangeRates";
 
 function App() {
   useUnload((e) => {
@@ -19,7 +19,7 @@ function App() {
     <ApolloProvider client={client}>
       <div>
         <h2>Coinbase GQL Example</h2>
-        <ExchangeRates />
+        {/* <ExchangeRates /> */}
       </div>
     </ApolloProvider>
   );
