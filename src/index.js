@@ -6,6 +6,7 @@ import ExchangeRates from "./ExchangeRates";
 
 function App() {
   useUnload((e) => {
+    console.log("useUnload e: ", e);
     e.preventDefault();
     e.returnValue = "";
   });
