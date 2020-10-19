@@ -15,10 +15,33 @@ function App() {
     cache: new InMemoryCache()
   });
 
-  function TestAlert() {
-    // CefRefPtr
-    // alert(test.myval);
-    console.log(window);
+  // window.addEventListener("beforeunload", (ev) => {
+  //   ev.preventDefault();
+  //   return (ev.returnValue = "Are you sure you want to close?");
+  // });
+
+  window.addEventListener("beforeunload", function (e) {
+    var confirmationMessage = "o/";
+
+    (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+    return confirmationMessage; //Webkit, Safari, Chrome
+  });
+
+  function TestIntegrationComms() {
+    // chrome.app.window.current().onClosed.addListener(function (e) {
+    //   console.log(e);
+    // });
+    // if (test != null) {
+    //   alert(test.myval);
+    // }
+    // console.log(window);
+    // alert(window.myfunc()); // Shows an alert box with "My Value!"
+    // function myFunc() {
+    //   // do something in JS.
+    // }
+    // window.register(myFunc);
+    // var test = window["User"]["UploadPicture"];
+    // test(e);
   }
 
   function ExchangeRates() {
@@ -63,10 +86,8 @@ function App() {
     if (true || error)
       return (
         <div>
-          <script language="JavaScript">
-            {/* Should Shows an alert box with "My Value!" from the integration */}
-            {TestAlert()}
-          </script>
+          {/* <script language="JavaScript">{TestIntegrationComms()}</script> */}
+          {TestIntegrationComms()}
           {/* <p>{`Error :( ${error.message}`}</p>
           <button onClick={() => refetch()}>Refetch!</button> */}
           <form onSubmit={(e) => submit(e)}>
@@ -75,13 +96,13 @@ function App() {
         </div>
       );
 
-    return data.rates.map(({ currency, rate }) => (
-      <div key={currency}>
-        <p>
-          {currency}: {rate}
-        </p>
-      </div>
-    ));
+    // return data.rates.map(({ currency, rate }) => (
+    //   <div key={currency}>
+    //     <p>
+    //       {currency}: {rate}
+    //     </p>
+    //   </div>
+    // ));
   }
 
   return (
