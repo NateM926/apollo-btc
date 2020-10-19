@@ -8,12 +8,17 @@ import {
   useQuery,
   gql
 } from "@apollo/client";
-import { useUnload } from "./useUnload";
+import useUnload from "./useUnload";
 
 function App() {
   const client = new ApolloClient({
     uri: "https://48p1r2roz4.sse.codesandbox.io",
     cache: new InMemoryCache()
+  });
+
+  useUnload((e) => {
+    e.preventDefault();
+    e.returnValue = "";
   });
 
   // testing close event in the integration (beforeunload / onclose)
@@ -28,11 +33,6 @@ function App() {
   // });
 
   function ExchangeRates() {
-    useUnload((e) => {
-      e.preventDefault();
-      e.returnValue = "";
-    });
-
     const { loading, error, data, networkStatus, refetch } = useQuery(
       gql`
         {
