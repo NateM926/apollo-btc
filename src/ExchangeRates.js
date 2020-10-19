@@ -38,7 +38,8 @@ export default function ExchangeRates() {
   if (networkStatus === NetworkStatus.refetch) return "Refetching!";
   if (loading) return <p>Loading...</p>;
 
-  if (error)
+  if (error) {
+    refetch();
     return (
       <div>
         <p>{`Error :( ${error.message}`}</p>
@@ -48,6 +49,7 @@ export default function ExchangeRates() {
         </form>
       </div>
     );
+  }
 
   return data.rates.map(({ currency, rate }) => (
     <div key={currency}>
