@@ -11,6 +11,11 @@ const useUnload = (fn) => {
     const onUnload = cb.current;
     console.log("cb: ", cb);
     window.addEventListener("beforeunload", onUnload);
+
+    window.addEventListener("onclose", (e) => {
+      alert(e);
+    });
+
     return () => window.removeEventListener("beforeunload", onUnload);
   }, []);
 };
