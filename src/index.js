@@ -16,7 +16,7 @@ function App() {
   });
 
   // testing close event in the integration (beforeunload / onclose)
-  window.addEventListener("onclose", function (e) {
+  window.addEventListener("close", function (e) {
     // Cancel the event as stated by the standard.
     e.preventDefault();
 
