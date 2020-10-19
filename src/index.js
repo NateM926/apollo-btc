@@ -21,6 +21,9 @@ function App() {
   // });
 
   window.addEventListener("beforeunload", function (e) {
+    // Cancel the event as stated by the standard.
+    e.preventDefault();
+
     var confirmationMessage = "o/";
 
     (e || window.event).returnValue = confirmationMessage; //Gecko + IE
