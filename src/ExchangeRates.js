@@ -39,7 +39,6 @@ export default function ExchangeRates() {
   if (loading) return <p>Loading...</p>;
 
   if (error) {
-    refetch();
     return (
       <div>
         <p>{`Error :( ${error.message}`}</p>
