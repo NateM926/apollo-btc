@@ -46,6 +46,7 @@ export default function ExchangeRates() {
         <form onSubmit={(e) => submit(e)}>
           <button type="submit">TEST SUBMIT FETCH</button>
         </form>
+        <button onClick={() => window.close()}>CLOSE</button>
       </div>
     );
   }
