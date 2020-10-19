@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import {
   ApolloClient,
-  // NetworkStatus,
+  NetworkStatus,
   InMemoryCache,
   ApolloProvider,
   useQuery,
@@ -15,11 +15,7 @@ function App() {
     cache: new InMemoryCache()
   });
 
-  // window.addEventListener("beforeunload", (ev) => {
-  //   ev.preventDefault();
-  //   return (ev.returnValue = "Are you sure you want to close?");
-  // });
-
+  // testing close event in the integration
   window.addEventListener("beforeunload", function (e) {
     // Cancel the event as stated by the standard.
     e.preventDefault();
@@ -30,25 +26,8 @@ function App() {
     return confirmationMessage; //Webkit, Safari, Chrome
   });
 
-  function TestIntegrationComms() {
-    // chrome.app.window.current().onClosed.addListener(function (e) {
-    //   console.log(e);
-    // });
-    // if (test != null) {
-    //   alert(test.myval);
-    // }
-    // console.log(window);
-    // alert(window.myfunc()); // Shows an alert box with "My Value!"
-    // function myFunc() {
-    //   // do something in JS.
-    // }
-    // window.register(myFunc);
-    // var test = window["User"]["UploadPicture"];
-    // test(e);
-  }
-
   function ExchangeRates() {
-    const { loading, error } = useQuery(
+    const { loading, error, data, networkStatus, refetch } = useQuery(
       gql`
         {
           rates(currency: "USD") {
@@ -63,7 +42,7 @@ function App() {
       }
     );
 
-    // if (networkStatus === NetworkStatus.refetch) return "Refetching!";
+    if (networkStatus === NetworkStatus.refetch) return "Refetching!";
     if (loading) return <p>Loading...</p>;
 
     const submit = (e) => {
@@ -86,26 +65,24 @@ function App() {
         .then((commits) => alert(JSON.stringify(commits)));
     };
 
-    if (true || error)
+    if (error)
       return (
         <div>
-          {/* <script language="JavaScript">{TestIntegrationComms()}</script> */}
-          {TestIntegrationComms()}
-          {/* <p>{`Error :( ${error.message}`}</p>
-          <button onClick={() => refetch()}>Refetch!</button> */}
+          <p>{`Error :( ${error.message}`}</p>
+          <button onClick={() => refetch()}>Refetch!</button>
           <form onSubmit={(e) => submit(e)}>
             <button type="submit">TEST SUBMIT FETCH</button>
           </form>
         </div>
       );
 
-    // return data.rates.map(({ currency, rate }) => (
-    //   <div key={currency}>
-    //     <p>
-    //       {currency}: {rate}
-    //     </p>
-    //   </div>
-    // ));
+    return data.rates.map(({ currency, rate }) => (
+      <div key={currency}>
+        <p>
+          {currency}: {rate}
+        </p>
+      </div>
+    ));
   }
 
   return (
