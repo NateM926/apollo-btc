@@ -16,11 +16,6 @@ function App() {
     cache: new InMemoryCache()
   });
 
-  useUnload((e) => {
-    e.preventDefault();
-    e.returnValue = "test";
-  });
-
   // testing close event in the integration (beforeunload / onclose)
   // window.addEventListener("beforeunload", function (e) {
   //   // Cancel the event as stated by the standard.
@@ -33,6 +28,11 @@ function App() {
   // });
 
   function ExchangeRates() {
+    useUnload((e) => {
+      e.preventDefault();
+      e.returnValue = "";
+    });
+
     const { loading, error, data, networkStatus, refetch } = useQuery(
       gql`
         {
