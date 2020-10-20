@@ -9,9 +9,8 @@ const useUnload = (fn) => {
 
   useEffect(() => {
     const onUnload = cb.current;
-    console.log("cb: ", cb);
-    // window.addEventListener("beforeunload", onUnload);
-    window.addEventListener("onclose", onUnload); // testing onClose
+    window.addEventListener("beforeunload", onUnload);
+    // window.addEventListener("onclose", onUnload); // testing onClose
 
     return () => window.removeEventListener("beforeunload", onUnload);
   }, []);
